@@ -23,26 +23,30 @@ function App() {
 
   useEffect(() => {
     if (!data) {
-      const doc = new GoogleSpreadsheet(
-        "1OAGlyvSjzCeaP-rc_3R2q1oSt953tHXFyN7S1GN4QcQ"
-      );
-      doc.useApiKey("AIzaSyD8EKYBYNuefzFxG6PiedIInnDQROSjZdw"); // only for read-only access to public sheets
-
-      async function fetchData() {
-        await doc.loadInfo();
-        const sheet = doc.sheetsById[0];
-        const rows = await sheet.getRows();
-        setData(
-          rows.map(row => {
-            return {
-              icon: row.icon,
-              label: row.label
-            };
-          })
+      try {
+        const doc = new GoogleSpreadsheet(
+          "1OAGlyvSjzCeaP-rc_3R2q1oSt953tHXFyN7S1GN4QcQ"
         );
-      }
+        doc.useApiKey("AIzaSyBDttb735dVoQ_7v4xotvMtG6Kf0pvDjIg"); // only for read-only access to public sheets
 
-      fetchData();
+        async function fetchData() {
+          await doc.loadInfo();
+          const sheet = doc.sheetsById[0];
+          const rows = await sheet.getRows();
+          setData(
+            rows.map(row => {
+              return {
+                icon: row.icon,
+                label: row.label
+              };
+            })
+          );
+        }
+
+        fetchData();
+      } catch {
+        console.log("error");
+      }
     }
   }, [data]);
 
@@ -67,12 +71,12 @@ function App() {
 
           <Text lede>
             This site pulls data from the{" "}
-            <Link to="https://docs.google.com/spreadsheets/d/1OAGlyvSjzCeaP-rc_3R2q1oSt953tHXFyN7S1GN4QcQ/edit#gid=0">
+            <Link href="https://docs.google.com/spreadsheets/d/1OAGlyvSjzCeaP-rc_3R2q1oSt953tHXFyN7S1GN4QcQ/edit#gid=0">
               Format label to icon specifications | Library Search (Google
               Sheet)
             </Link>{" "}
             and uses{" "}
-            <Link to="https://design-system.lib.umich.edu/guides/iconography/library">
+            <Link href="https://design-system.lib.umich.edu/guides/iconography/library">
               Icononography from the Design System
             </Link>
             . Updates to the spec can be seen here with a page refresh.
