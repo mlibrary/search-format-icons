@@ -13,7 +13,7 @@ import {
   TYPOGRAPHY,
   Loading,
   Text,
-  Link
+  Link,
 } from "@umich-lib/core";
 
 const { GoogleSpreadsheet } = require("google-spreadsheet");
@@ -34,10 +34,10 @@ function App() {
           const sheet = doc.sheetsById[0];
           const rows = await sheet.getRows();
           setData(
-            rows.map(row => {
+            rows.map((row) => {
               return {
                 icon: row.icon,
-                label: row.label
+                label: row.label,
               };
             })
           );
@@ -61,8 +61,8 @@ function App() {
             maxWidth: "38rem",
             marginTop: SPACING["L"],
             "> *": {
-              marginBottom: SPACING["M"]
-            }
+              marginBottom: SPACING["M"],
+            },
           }}
         >
           <Heading level={1} size="3XL">
@@ -86,7 +86,7 @@ function App() {
             <div
               css={{
                 display: "inline-block",
-                padding: `${SPACING["XL"]} 0`
+                padding: `${SPACING["XL"]} 0`,
               }}
             >
               <Loading />
@@ -101,15 +101,15 @@ function App() {
                 th: {
                   textAlign: "left",
                   borderBottom: `solid 2px ${COLORS.maize[400]}`,
-                  ...TYPOGRAPHY["3XS"]
+                  ...TYPOGRAPHY["3XS"],
                 },
                 "th, td": {
                   padding: SPACING["M"],
-                  paddingLeft: "0"
+                  paddingLeft: "0",
                 },
                 td: {
-                  borderBottom: `solid 1px ${COLORS.neutral[100]}`
-                }
+                  borderBottom: `solid 1px ${COLORS.neutral[100]}`,
+                },
               }}
             >
               <thead>
@@ -119,8 +119,8 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {data.map(({ icon, label }) => (
-                  <tr>
+                {data.map(({ icon, label }, i) => (
+                  <tr key={label + icon + i}>
                     <td>{label}</td>
                     <td>{icons[icon] && <Icon icon={icon} />}</td>
                     <td>{icon}</td>
