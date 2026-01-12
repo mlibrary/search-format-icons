@@ -8,10 +8,10 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@umich-lib/core": "^2.0.6",
-    "google-spreadsheet": "^3.0.10",
+    "google-spreadsheet": "^3.3.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-scripts": "3.4.0"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
